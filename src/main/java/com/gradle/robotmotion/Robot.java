@@ -1,18 +1,18 @@
 package com.gradle.robotmotion;
 
-import static java.lang.Boolean.compare;
-
 public class Robot {
 
     private boolean penUp;
     private Position currentPosition;
-    enum Orientation{NORTH,SOUTH,EAST,WEST}
+
+    enum Orientation {NORTH, SOUTH, EAST, WEST}
+
     private Orientation orientation;
 
 
-    public Robot(){
+    public Robot() {
         penUp = true;
-        currentPosition = new Position(0,0);
+        currentPosition = new Position(0, 0);
         orientation = Orientation.NORTH;
     }
 
@@ -28,56 +28,58 @@ public class Robot {
         return currentPosition;
     }
 
-    public void turnRight()
-    {
-        switch (orientation){
-            case NORTH :
-                orientation=Orientation.EAST;
+    public void turnRight() {
+        switch (orientation) {
+            case NORTH:
+                orientation = Orientation.EAST;
                 break;
             case SOUTH:
-                orientation=Orientation.WEST;
+                orientation = Orientation.WEST;
                 break;
             case EAST:
-                orientation=Orientation.SOUTH;
+                orientation = Orientation.SOUTH;
                 break;
             case WEST:
-                orientation=Orientation.NORTH;
+                orientation = Orientation.NORTH;
                 break;
         }
     }
 
-    public void turnLeft()
-    {
-        switch (orientation){
+    public void turnLeft() {
+        switch (orientation) {
             case SOUTH:
-                orientation=Orientation.EAST;
+                orientation = Orientation.EAST;
                 break;
             case NORTH:
-                orientation=Orientation.WEST;
+                orientation = Orientation.WEST;
                 break;
             case WEST:
-                orientation=Orientation.SOUTH;
+                orientation = Orientation.SOUTH;
                 break;
             case EAST:
-                orientation=Orientation.NORTH;
+                orientation = Orientation.NORTH;
                 break;
         }
     }
 
-    public void PenUp(boolean penUp) {
-        if(!penUp) {
-            penUp = true;
-        }
+    public void penUp() {
+        penUp = true;
     }
 
-    public void PenDown(boolean penUp) {
-        if(penUp) {
-            penUp = false;
-        }
+    public void penDown() {
+        penUp = false;
     }
 
     public void setCurrentPosition(int x, int y) {
         this.currentPosition.setxPosition(x);
         this.currentPosition.setyPosition(y);
+    }
+
+    public String printCurrentPosition() {
+        if (penUp == true) {
+            return "Position: " + currentPosition + " - Pen: Up - Facing: " + orientation;
+        } else {
+            return "Position: " + currentPosition + " - Pen: Down - Facing: " + orientation;
+        }
     }
 }
