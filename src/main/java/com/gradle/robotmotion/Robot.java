@@ -4,16 +4,16 @@ public class Robot {
 
     private boolean penUp;
     private Position currentPosition;
-
     enum Orientation {NORTH, SOUTH, EAST, WEST}
-
     private Orientation orientation;
+    Floor floor;
 
 
-    public Robot() {
+    public Robot(Floor f) {
         penUp = true;
         currentPosition = new Position(0, 0);
         orientation = Orientation.NORTH;
+        floor = f;
     }
 
     public Orientation getOrientation() {
@@ -70,16 +70,118 @@ public class Robot {
         penUp = false;
     }
 
-    public void setCurrentPosition(int x, int y) {
-        this.currentPosition.setxPosition(x);
-        this.currentPosition.setyPosition(y);
-    }
-
     public String printCurrentPosition() {
         if (penUp == true) {
-            return "Position: " + currentPosition + " - Pen: Up - Facing: " + orientation;
+            return "Position: " + currentPosition.toString() + " - Pen: Up - Facing: " + orientation;
         } else {
-            return "Position: " + currentPosition + " - Pen: Down - Facing: " + orientation;
+            return "Position: " + currentPosition.toString() + " - Pen: Down - Facing: " + orientation;
+        }
+    }
+
+    public void moveForward(int spaces){
+        switch (orientation){
+            case SOUTH:
+                if(penUp){
+                    setPositionOnSouthMovement(spaces);
+                }
+                else{
+                    Position previousPosition = new Position(currentPosition);
+                    Position newPosition = setPositionOnSouthMovement(spaces);
+                    setFloorWhenSouthMovementPenDown(previousPosition, newPosition);
+                }
+                break;
+            case NORTH:
+                if(penUp){
+                    setPositionOnNorthMovement(spaces);
+                }
+                else{
+                    Position previousPosition = new Position(currentPosition);
+                    Position newPosition = setPositionOnNorthMovement(spaces);
+                    setFloorWhenNorthMovementPenDown(previousPosition, newPosition);
+                }
+                break;
+            case WEST:
+                if(penUp){
+                    setPositionOnWestMovement(spaces);
+                }
+                else{
+                    Position previousPosition = new Position(currentPosition);
+                    Position newPosition = setPositionOnWestMovement(spaces);
+                    setFloorWhenWestMovementPenDown(previousPosition, newPosition);
+                }
+                break;
+            case EAST:
+                if(penUp){
+                    setPositionOnEastMovement(spaces);
+                }
+                else{
+                    Position previousPosition = new Position(currentPosition);
+                    Position newPosition = setPositionOnEastMovement(spaces);
+                    setFloorWhenEastMovementPenDown(previousPosition, newPosition);
+                }
+                break;
+        }
+    }
+
+
+    public Position setPositionOnSouthMovement(int spaces){
+        if(currentPosition.getyPosition() - spaces < 0){
+            currentPosition.setyPosition(0);
+        }
+        else{
+            currentPosition.setyPosition(currentPosition.getyPosition() - spaces);
+        }
+        return currentPosition;
+    }
+    public void setFloorWhenSouthMovementPenDown(Position previous, Position newPosition){
+
+        for(int i = previous.getyPosition(); i >= newPosition.getyPosition(); i--){
+            floor.getFloor()[previous.getxPosition()][i] = 1;
+        }
+    }
+    public Position setPositionOnNorthMovement(int spaces){
+        if(currentPosition.getyPosition() + spaces > floor.getFloorSize() - 1){
+            currentPosition.setyPosition(floor.getFloorSize() - 1);
+        }
+        else{
+            currentPosition.setyPosition(currentPosition.getyPosition() + spaces);
+        }
+        return currentPosition;
+    }
+    public void setFloorWhenNorthMovementPenDown(Position previous, Position newPosition){
+
+        for(int i = previous.getyPosition(); i <= newPosition.getyPosition(); i++){
+            System.out.println("Y position:" + i);
+            floor.getFloor()[previous.getxPosition()][i] = 1;
+        }
+    }
+    public Position setPositionOnWestMovement(int spaces){
+        if(currentPosition.getxPosition() - spaces < 0){
+            currentPosition.setxPosition(0);
+        }
+        else{
+            currentPosition.setxPosition(currentPosition.getyPosition() - spaces);
+        }
+        return currentPosition;
+    }
+    public void setFloorWhenWestMovementPenDown(Position previous, Position newPosition){
+
+        for(int i = previous.getxPosition(); i >= newPosition.getxPosition(); i--){
+            floor.getFloor()[i][previous.getyPosition()] = 1;
+        }
+    }
+    public Position setPositionOnEastMovement(int spaces){
+        if(currentPosition.getxPosition() + spaces > floor.getFloorSize()-1){
+            currentPosition.setxPosition(floor.getFloorSize() - 1);
+        }
+        else{
+            currentPosition.setxPosition(currentPosition.getxPosition() + spaces);
+        }
+        return currentPosition;
+    }
+    public void setFloorWhenEastMovementPenDown(Position previous, Position newPosition){
+        for(int i = previous.getxPosition(); i <= newPosition.getxPosition(); i++){
+            floor.getFloor()[i][previous.getyPosition()] = 1;
         }
     }
 }

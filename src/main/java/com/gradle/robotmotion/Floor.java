@@ -30,7 +30,7 @@ public class Floor {
         for(int i = floorSize-1 ; i >= 0 ; i--){
             System.out.print(i + " ");
             for(int j = 0 ; j < floorSize ; j++){
-                if(floor[i][j] == 1) {
+                if(floor[j][i] == 1) {
                     System.out.print("*" + " ");
                 }
                 else{
@@ -43,5 +43,6 @@ public class Floor {
         for(int i = 0; i < floorSize; i++){
             System.out.print(i + " ");
         }
+        System.out.println("");
     }
 }
