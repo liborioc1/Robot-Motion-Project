@@ -1,5 +1,7 @@
 package com.gradle.robotmotion;
 
+import static java.lang.Boolean.compare;
+
 public class Robot {
 
     private boolean penUp;
@@ -62,8 +64,16 @@ public class Robot {
         }
     }
 
-    public void setPenUp(boolean penUp) {
-        this.penUp = penUp;
+    public void PenUp(boolean penUp) {
+        if(!penUp) {
+            penUp = true;
+        }
+    }
+
+    public void PenDown(boolean penUp) {
+        if(penUp) {
+            penUp = false;
+        }
     }
 
     public void setCurrentPosition(int x, int y) {
