@@ -1,4 +1,4 @@
 package com.gradle.robotmotion;
 
-public class CommandExecutor {
+public class Menu {
 }
