@@ -1,16 +1,97 @@
 package com.gradle.robotmotion;
 
+import java.util.Locale;
+import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class CommandsDecoder {
 
     private String userCommand;
+    private Robot robot;
+    private Floor floor;
+    private AtomicBoolean flag;
 
-    public CommandsDecoder(String command){
-        userCommand = command;
+    public CommandsDecoder( Robot robot, Floor floor,AtomicBoolean flag)
+    {
+        this.robot=robot;
+        this.floor=floor;
+        this.flag=flag;
     }
 
-//    switch (command){
-//
-//        case turnRight:
-//            robot.setOrientation(Orientation.WEST);
-//    }
+    public void decodeCommand(String command)
+    {
+
+        command=command.toLowerCase();
+
+        if(command.matches("^[a-zA-Z]{1}\\s{1}\\d+$"))
+        {
+            String letter=command.split(" ")[0];
+            int number=Integer.parseInt(command.split(" ")[1]);
+            System.out.println(letter);
+
+           //one char followed by one digit
+            switch (letter)
+            {
+                case "m":
+                    if(floor.getFloorSize()==0)
+                    {
+                        System.out.println("Floor has not been initialized. Floor must be initialized to perform requested move\n");
+                        return;
+                    }
+                    robot.moveForward(number);
+                    break;
+                case "i":
+                    floor.initializeFloor(number);
+                    break;
+                default:
+                    System.out.println("Invalid Input Format. Please Check Spaces");
+            }
+        }
+        else if(command.matches("^[a-zA-Z]{1}$"))
+        {
+            String letter=command.split(" ")[0];
+
+            if(letter.equals("q"))
+            {
+                flag.set(false);
+                System.out.println("End of Program");
+                return;
+            }
+            if(floor.getFloorSize()==0)
+            {
+                System.out.println("Floor has not been initialized. Floor must be initialized to perform requested move\n");
+                return;
+            }
+            switch (letter)
+            {
+                case "u":
+                    robot.penUp();
+                    break;
+                case "d":
+                    robot.penDown();
+                    break;
+                case "r":
+                    robot.turnRight();
+                    break;
+                case "l":
+                    robot.turnLeft();
+                    break;
+                case "p":
+                    floor.printFloor();
+                    break;
+                case "c":
+                    System.out.println(robot.printCurrentPosition());
+                    break;
+                default:
+                    System.out.println("Invalid Input Format. Please Check Spaces");
+
+            }
+        }
+        else
+        {
+            System.out.println("Invalid Input Format. Please Check Spaces");
+        }
+
+    }
+
 }

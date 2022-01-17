@@ -79,6 +79,7 @@ public class Robot {
     }
 
     public void moveForward(int spaces){
+
         switch (orientation){
             case SOUTH:
                 if(penUp){
