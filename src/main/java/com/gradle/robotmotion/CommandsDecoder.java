@@ -27,7 +27,6 @@ public class CommandsDecoder {
         {
             String letter=command.split(" ")[0];
             int number=Integer.parseInt(command.split(" ")[1]);
-            System.out.println(letter);
 
            //one char followed by one digit
             switch (letter)
@@ -35,7 +34,7 @@ public class CommandsDecoder {
                 case "m":
                     if(floor.getFloorSize()==0)
                     {
-                        System.out.println("Floor has not been initialized. Floor must be initialized to perform requested move\n");
+                        System.out.println("Floor has not been initialized. Floor must be initialized to perform requested move");
                         return;
                     }
                     robot.moveForward(number);
@@ -59,7 +58,7 @@ public class CommandsDecoder {
             }
             if(floor.getFloorSize()==0)
             {
-                System.out.println("Floor has not been initialized. Floor must be initialized to perform requested move\n");
+                System.out.println("Floor has not been initialized. Floor must be initialized to perform requested move");
                 return;
             }
             switch (letter)
