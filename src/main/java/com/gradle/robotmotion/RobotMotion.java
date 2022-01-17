@@ -30,7 +30,7 @@ public class RobotMotion {
 
         while(continueLoop.get())
         {
-            System.out.println("Your command selection");
+            System.out.println("Your command selection:");
             String command=scanner.nextLine();
             commandsDecoder.decodeCommand(command);
             //System.out.println(continueLoop);

@@ -4,7 +4,7 @@ public class Robot {
 
     private boolean penUp;
     private Position currentPosition;
-    enum Orientation {NORTH, SOUTH, EAST, WEST}
+    public enum Orientation {NORTH, SOUTH, EAST, WEST}
     private Orientation orientation;
     Floor floor;
 
@@ -71,7 +71,7 @@ public class Robot {
     }
 
     public String printCurrentPosition() {
-        if (penUp == true) {
+        if (penUp) {
             return "Position: " + currentPosition.toString() + " - Pen: Up - Facing: " + orientation;
         } else {
             return "Position: " + currentPosition.toString() + " - Pen: Down - Facing: " + orientation;
