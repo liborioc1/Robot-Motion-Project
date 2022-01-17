@@ -7,9 +7,6 @@ public class Floor {
 
     public Floor(){}
 
-    public void setFloorSize(int floorSize) {
-        this.floorSize = floorSize;
-    }
 
     public int getFloorSize() {
         return floorSize;
