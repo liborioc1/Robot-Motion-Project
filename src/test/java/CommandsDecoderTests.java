@@ -31,6 +31,8 @@ public class CommandsDecoderTests {
     @Test
     public void testDecodeCommand()
     {
+        //TODO test negative, decimal etc
+
         ByteArrayOutputStream outContent3 = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent3));
         commandsDecoder.decodeCommand("m 3");

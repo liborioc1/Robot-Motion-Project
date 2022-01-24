@@ -2,6 +2,9 @@ package com.gradle.robotmotion;
 
 public class Robot {
 
+    //TODO extract interface for requirements
+    //TODO redefine the requirements
+
     private boolean penUp;
     private Position currentPosition;
     public enum Orientation {NORTH, SOUTH, EAST, WEST}

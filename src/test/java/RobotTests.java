@@ -14,6 +14,8 @@ public class RobotTests {
     static Floor floor;
     static Robot robot;
 
+    //TODO BeforeEach and AfterEach
+
     @Test
     public void testGetOrientation(){
         floor = new Floor();

@@ -17,8 +17,13 @@ public class Floor {
     }
 
     public void initializeFloor(int size){
-        floorSize = size;
-        floor = new int[floorSize][floorSize];
+        if(size > 0) {
+            floorSize = size;
+            floor = new int[floorSize][floorSize];
+        }
+        else{
+            System.out.println("Invalid Floor Size. Please enter a value greater than 0.");
+        }
     }
 
     public void printFloor(){

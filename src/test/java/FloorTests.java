@@ -1,4 +1,5 @@
 import com.gradle.robotmotion.Floor;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -18,6 +19,21 @@ public class FloorTests {
                 assertEquals(0, floor.getFloor()[i][j]);
             }
         }
+
+
+        floor = new Floor();
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        floor.initializeFloor(-5);
+        String expectedOutput  = "Invalid Floor Size. Please enter a value greater than 0.\r\n";
+        assertEquals(expectedOutput, outContent.toString());
+
+        floor = new Floor();
+        outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        floor.initializeFloor(0);
+        expectedOutput  = "Invalid Floor Size. Please enter a value greater than 0.\r\n";
+        assertEquals(expectedOutput, outContent.toString());
     }
 
     @Test
