@@ -130,7 +130,8 @@ public class Robot {
 
     public Position setPositionOnSouthMovement(int spaces){
         if(currentPosition.getyPosition() - spaces < 0){
-            currentPosition.setyPosition(0);
+            System.out.println("Number of spaces for movement is too large");
+            return currentPosition;
         }
         else{
             currentPosition.setyPosition(currentPosition.getyPosition() - spaces);
@@ -145,7 +146,8 @@ public class Robot {
     }
     public Position setPositionOnNorthMovement(int spaces){
         if(currentPosition.getyPosition() + spaces > floor.getFloorSize() - 1){
-            currentPosition.setyPosition(floor.getFloorSize() - 1);
+            System.out.println("Number of spaces for movement is too large");
+            return currentPosition;
         }
         else{
             currentPosition.setyPosition(currentPosition.getyPosition() + spaces);
@@ -155,13 +157,13 @@ public class Robot {
     public void setFloorWhenNorthMovementPenDown(Position previous, Position newPosition){
 
         for(int i = previous.getyPosition(); i <= newPosition.getyPosition(); i++){
-            System.out.println("Y position:" + i);
             floor.getFloor()[previous.getxPosition()][i] = 1;
         }
     }
     public Position setPositionOnWestMovement(int spaces){
         if(currentPosition.getxPosition() - spaces < 0){
-            currentPosition.setxPosition(0);
+            System.out.println("Number of spaces for movement is too large");
+            return currentPosition;
         }
         else{
             currentPosition.setxPosition(currentPosition.getyPosition() - spaces);
@@ -176,7 +178,8 @@ public class Robot {
     }
     public Position setPositionOnEastMovement(int spaces){
         if(currentPosition.getxPosition() + spaces > floor.getFloorSize()-1){
-            currentPosition.setxPosition(floor.getFloorSize() - 1);
+            System.out.println("Number of spaces for movement is too large");
+            return currentPosition;
         }
         else{
             currentPosition.setxPosition(currentPosition.getxPosition() + spaces);

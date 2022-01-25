@@ -17,33 +17,43 @@ public class Floor {
     }
 
     public void initializeFloor(int size){
-        if(size > 0) {
-            floorSize = size;
-            floor = new int[floorSize][floorSize];
-        }
-        else{
-            System.out.println("Invalid Floor Size. Please enter a value greater than 0.");
-        }
+        floorSize = size;
+        floor = new int[floorSize][floorSize];
     }
 
     public void printFloor(){
         System.out.println("Floor is of size: " + floorSize + " x " + floorSize);
 
         for(int i = floorSize-1 ; i >= 0 ; i--){
-            System.out.print(i + " ");
+            if(i < 10){
+                System.out.print(i + "   ");
+            }
+            else {
+                System.out.print(i + "  ");
+            }
             for(int j = 0 ; j < floorSize ; j++){
                 if(floor[j][i] == 1) {
-                    System.out.print("*" + " ");
+                    if(j > 9) {
+                        System.out.print("*" + "   ");
+                    }
+                    else{
+                        System.out.print("*" + "  ");
+                    }
                 }
                 else{
-                    System.out.print("  ");
+                    if(j > 9) {
+                        System.out.print("    ");
+                    }
+                    else{
+                        System.out.print("   ");
+                    }
                 }
             }
             System.out.println();
         }
-        System.out.print("  ");
+        System.out.print("    ");
         for(int i = 0; i < floorSize; i++){
-            System.out.print(i + " ");
+            System.out.print(i + "  ");
         }
         System.out.println("");
     }

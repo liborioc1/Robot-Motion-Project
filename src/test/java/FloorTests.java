@@ -20,20 +20,6 @@ public class FloorTests {
             }
         }
 
-
-        floor = new Floor();
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        floor.initializeFloor(-5);
-        String expectedOutput  = "Invalid Floor Size. Please enter a value greater than 0.\r\n";
-        assertEquals(expectedOutput, outContent.toString());
-
-        floor = new Floor();
-        outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        floor.initializeFloor(0);
-        expectedOutput  = "Invalid Floor Size. Please enter a value greater than 0.\r\n";
-        assertEquals(expectedOutput, outContent.toString());
     }
 
     @Test
@@ -66,17 +52,17 @@ public class FloorTests {
         floor.printFloor();
         String expectedOutput  =
                 "Floor is of size: 10 x 10\r\n" +
-                "9                     \r\n" +
-                "8                     \r\n" +
-                "7                     \r\n" +
-                "6                     \r\n" +
-                "5                     \r\n" +
-                "4                     \r\n" +
-                "3                     \r\n" +
-                "2                     \r\n" +
-                "1                     \r\n" +
-                "0                     \r\n" +
-                "  0 1 2 3 4 5 6 7 8 9 \r\n";
+                "9                                 \r\n" +
+                "8                                 \r\n" +
+                "7                                 \r\n" +
+                "6                                 \r\n" +
+                "5                                 \r\n" +
+                "4                                 \r\n" +
+                "3                                 \r\n" +
+                "2                                 \r\n" +
+                "1                                 \r\n" +
+                "0                                 \r\n" +
+                "    0  1  2  3  4  5  6  7  8  9  \r\n";
         assertEquals(expectedOutput, outContent.toString());
 
 
@@ -90,17 +76,17 @@ public class FloorTests {
         floor.printFloor();
         expectedOutput  =
                         "Floor is of size: 10 x 10\r\n" +
-                        "9 * * * * * * * * * * \r\n" +
-                        "8 * * * * * * * * * * \r\n" +
-                        "7 * * * * * * * * * * \r\n" +
-                        "6 * * * * * * * * * * \r\n" +
-                        "5 * * * * * * * * * * \r\n" +
-                        "4 * * * * * * * * * * \r\n" +
-                        "3 * * * * * * * * * * \r\n" +
-                        "2 * * * * * * * * * * \r\n" +
-                        "1 * * * * * * * * * * \r\n" +
-                        "0 * * * * * * * * * * \r\n" +
-                        "  0 1 2 3 4 5 6 7 8 9 \r\n";
+                        "9   *  *  *  *  *  *  *  *  *  *  \r\n" +
+                        "8   *  *  *  *  *  *  *  *  *  *  \r\n" +
+                        "7   *  *  *  *  *  *  *  *  *  *  \r\n" +
+                        "6   *  *  *  *  *  *  *  *  *  *  \r\n" +
+                        "5   *  *  *  *  *  *  *  *  *  *  \r\n" +
+                        "4   *  *  *  *  *  *  *  *  *  *  \r\n" +
+                        "3   *  *  *  *  *  *  *  *  *  *  \r\n" +
+                        "2   *  *  *  *  *  *  *  *  *  *  \r\n" +
+                        "1   *  *  *  *  *  *  *  *  *  *  \r\n" +
+                        "0   *  *  *  *  *  *  *  *  *  *  \r\n" +
+                        "    0  1  2  3  4  5  6  7  8  9  \r\n";
         assertEquals(expectedOutput, outContent.toString());
 
 
@@ -114,17 +100,17 @@ public class FloorTests {
         floor.printFloor();
         expectedOutput  =
                 "Floor is of size: 10 x 10\r\n" +
-                        "9 * * * * * * * * * * \r\n" +
-                        "8 * * * * * * * * * * \r\n" +
-                        "7 * * * * * * * * * * \r\n" +
-                        "6 * * * * * * * * * * \r\n" +
-                        "5 * * * * * * * * * * \r\n" +
-                        "4 * * * * * * * * * * \r\n" +
-                        "3 * * * * * * * * * * \r\n" +
-                        "2           * * * * * \r\n" +
-                        "1           * * * * * \r\n" +
-                        "0           * * * * * \r\n" +
-                        "  0 1 2 3 4 5 6 7 8 9 \r\n";
+                        "9   *  *  *  *  *  *  *  *  *  *  \r\n" +
+                        "8   *  *  *  *  *  *  *  *  *  *  \r\n" +
+                        "7   *  *  *  *  *  *  *  *  *  *  \r\n" +
+                        "6   *  *  *  *  *  *  *  *  *  *  \r\n" +
+                        "5   *  *  *  *  *  *  *  *  *  *  \r\n" +
+                        "4   *  *  *  *  *  *  *  *  *  *  \r\n" +
+                        "3   *  *  *  *  *  *  *  *  *  *  \r\n" +
+                        "2                  *  *  *  *  *  \r\n" +
+                        "1                  *  *  *  *  *  \r\n" +
+                        "0                  *  *  *  *  *  \r\n" +
+                        "    0  1  2  3  4  5  6  7  8  9  \r\n";
         assertEquals(expectedOutput, outContent.toString());
     }
 

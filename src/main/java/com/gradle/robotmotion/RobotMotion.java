@@ -26,7 +26,7 @@ public class RobotMotion {
                 "[Q|q] Stop the program\n" +
                 "[I n|i n] Initialize the system: The values of the array floor are zeros and the robot\n" +
                 "is back to [0, 0], pen up and facing north. n size of the array, an integer\n" +
-                "greater than zero ");
+                "> 0 and <= 40");
 
         while(continueLoop.get())
         {

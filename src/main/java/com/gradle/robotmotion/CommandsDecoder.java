@@ -1,5 +1,6 @@
 package com.gradle.robotmotion;
 
+import java.math.BigDecimal;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -23,28 +24,30 @@ public class CommandsDecoder {
 
         command=command.toLowerCase();
 
-        if(command.matches("^[a-zA-Z]{1}\\s{1}\\d+$"))
+        if(command.matches("^[a-zA-Z]{1}\\s{1}([0-9]|[1-3][0-9]|40){0,1}$"))
         {
-            String letter=command.split(" ")[0];
-            int number=Integer.parseInt(command.split(" ")[1]);
 
-           //one char followed by one digit
-            switch (letter)
-            {
-                case "m":
-                    if(floor.getFloorSize()==0)
-                    {
-                        System.out.println("Floor has not been initialized. Floor must be initialized to perform requested move");
-                        return;
-                    }
-                    robot.moveForward(number);
-                    break;
-                case "i":
-                    floor.initializeFloor(number);
-                    break;
-                default:
-                    System.out.println("Invalid Input Format. Please Check Spaces");
-            }
+            String letter=command.split(" ")[0];
+            BigDecimal numberBigDecimal = new BigDecimal(command.split(" ")[1]);
+            int number = numberBigDecimal.intValue();
+                //one char followed by one digit
+                switch (letter)
+                {
+                    case "m":
+                        if(floor.getFloorSize() == 0)
+                        {
+                            System.out.println("Floor has not been initialized. Floor must be initialized to perform requested move");
+                            return;
+                        }
+                        robot.moveForward(number);
+                        break;
+                    case "i":
+                        floor.initializeFloor(number);
+                        break;
+                    default:
+                        System.out.println("Invalid Input Format. Please Check Spaces");
+                }
+
         }
         else if(command.matches("^[a-zA-Z]{1}$"))
         {
@@ -88,7 +91,7 @@ public class CommandsDecoder {
         }
         else
         {
-            System.out.println("Invalid Input Format. Please Check Spaces");
+            System.out.println("Invalid Input Format or Incorrect Command or Value(must be <= 40)");
         }
 
     }
