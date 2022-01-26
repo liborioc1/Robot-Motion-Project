@@ -73,6 +73,10 @@ public class Robot {
         penUp = false;
     }
 
+    public void setCurrentPosition(Position position)
+    {
+        currentPosition=new Position(position.getxPosition(),position.getyPosition());
+    }
     public String printCurrentPosition() {
         if (penUp) {
             return "Position: " + currentPosition.toString() + " - Pen: Up - Facing: " + orientation;
@@ -81,7 +85,7 @@ public class Robot {
         }
     }
 
-    public void moveForward(int spaces){
+    public Position moveForward(int spaces){
 
         switch (orientation){
             case SOUTH:
@@ -125,6 +129,7 @@ public class Robot {
                 }
                 break;
         }
+        return currentPosition;
     }
 
 
