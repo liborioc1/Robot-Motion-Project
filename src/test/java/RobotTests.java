@@ -107,10 +107,10 @@ public class RobotTests {
         floor.initializeFloor(10);
 
         robot.penUp();
-        Assertions.assertEquals("Position: {0,0} - Pen: Up - Facing: NORTH","Position: " + robot.getCurrentPosition().toString() + " - Pen: Up - Facing: " + robot.getOrientation().toString());
+        Assertions.assertEquals("Position: {0,0} - Pen: Up - Facing: NORTH",robot.printCurrentPosition());
 
         robot.penDown();
-        Assertions.assertEquals("Position: {0,0} - Pen: Down - Facing: NORTH","Position: " + robot.getCurrentPosition().toString() + " - Pen: Down - Facing: " + robot.getOrientation().toString());
+        Assertions.assertEquals("Position: {0,0} - Pen: Down - Facing: NORTH",robot.printCurrentPosition());
 
 
     }

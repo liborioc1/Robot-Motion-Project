@@ -111,6 +111,63 @@ public class FloorTests {
                         "0                  *  *  *  *  *  \r\n" +
                         "    0  1  2  3  4  5  6  7  8  9  \r\n";
         assertEquals(expectedOutput, outContent.toString());
+
+
+        floor = new Floor();
+        floor.initializeFloor(15);
+        outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        floor.printFloor();
+        expectedOutput  =
+                "Floor is of size: 15 x 15\r\n" +
+                        "14                                                    \r\n" +
+                        "13                                                    \r\n" +
+                        "12                                                    \r\n" +
+                        "11                                                    \r\n" +
+                        "10                                                    \r\n" +
+                        "9                                                     \r\n" +
+                        "8                                                     \r\n" +
+                        "7                                                     \r\n" +
+                        "6                                                     \r\n" +
+                        "5                                                     \r\n" +
+                        "4                                                     \r\n" +
+                        "3                                                     \r\n" +
+                        "2                                                     \r\n" +
+                        "1                                                     \r\n" +
+                        "0                                                     \r\n" +
+                        "    0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  \r\n";
+        assertEquals(expectedOutput, outContent.toString());
+
+
+        for(int i = 0; i <= floor.getFloorSize() - 1; i++){
+            for(int j = 0; j <= floor.getFloorSize() - 1; j++){
+                floor.getFloor()[i][j] = 1;
+            }
+        }
+        outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        floor.printFloor();
+        expectedOutput  =
+                "Floor is of size: 15 x 15\r\n" +
+                        "14  *  *  *  *  *  *  *  *  *  *  *   *   *   *   *   \r\n" +
+                        "13  *  *  *  *  *  *  *  *  *  *  *   *   *   *   *   \r\n" +
+                        "12  *  *  *  *  *  *  *  *  *  *  *   *   *   *   *   \r\n" +
+                        "11  *  *  *  *  *  *  *  *  *  *  *   *   *   *   *   \r\n" +
+                        "10  *  *  *  *  *  *  *  *  *  *  *   *   *   *   *   \r\n" +
+                        "9   *  *  *  *  *  *  *  *  *  *  *   *   *   *   *   \r\n" +
+                        "8   *  *  *  *  *  *  *  *  *  *  *   *   *   *   *   \r\n" +
+                        "7   *  *  *  *  *  *  *  *  *  *  *   *   *   *   *   \r\n" +
+                        "6   *  *  *  *  *  *  *  *  *  *  *   *   *   *   *   \r\n" +
+                        "5   *  *  *  *  *  *  *  *  *  *  *   *   *   *   *   \r\n" +
+                        "4   *  *  *  *  *  *  *  *  *  *  *   *   *   *   *   \r\n" +
+                        "3   *  *  *  *  *  *  *  *  *  *  *   *   *   *   *   \r\n" +
+                        "2   *  *  *  *  *  *  *  *  *  *  *   *   *   *   *   \r\n" +
+                        "1   *  *  *  *  *  *  *  *  *  *  *   *   *   *   *   \r\n" +
+                        "0   *  *  *  *  *  *  *  *  *  *  *   *   *   *   *   \r\n" +
+                        "    0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  \r\n";
+        assertEquals(expectedOutput, outContent.toString());
+
+
     }
 
 }

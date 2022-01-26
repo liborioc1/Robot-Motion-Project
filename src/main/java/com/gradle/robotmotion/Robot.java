@@ -74,9 +74,8 @@ public class Robot {
     }
 
     public void setCurrentPosition(Position position)
-    {
-        currentPosition=new Position(position.getxPosition(),position.getyPosition());
-    }
+    {currentPosition=new Position(position.getxPosition(),position.getyPosition());}
+
     public String printCurrentPosition() {
         if (penUp) {
             return "Position: " + currentPosition.toString() + " - Pen: Up - Facing: " + orientation;
