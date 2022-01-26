@@ -12,9 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MoveTestSalma {
     @Test
     public void testMove(){
+
         Floor floor = new Floor();
         floor.initializeFloor(20);
         Robot robot=new Robot(floor);
+
         // (A2,B2,C1,D2)
         robot.setCurrentPosition(new Position(10,10));
         Assertions.assertEquals(10,robot.getCurrentPosition().getxPosition());
@@ -23,14 +25,36 @@ public class MoveTestSalma {
         Position position=robot.moveForward(2);
         Assertions.assertEquals(10,position.getxPosition());
         Assertions.assertEquals(12,position.getyPosition());
+        Floor testFloor=new Floor();
+        testFloor.initializeFloor(20);
+        for(int i = 10; i <=12; i++) {
+            testFloor.getFloor()[10][i]=1;
+        }
+        for(int i = 0; i <= floor.getFloorSize() - 1; i++){
+            for(int j = 0; j <= floor.getFloorSize() - 1; j++){
+                assertEquals(floor.getFloor()[i][j],  testFloor.getFloor()[i][j]);
+            }
+        }
 
         // (A2,B2,C1,D2)
+        floor = new Floor();
+        floor.initializeFloor(20);
         robot=new Robot(floor);
         robot.setCurrentPosition(new Position(floor.getFloorSize()-1,0));
         robot.penDown();
         position=robot.moveForward(10);
         Assertions.assertEquals(floor.getFloorSize()-1,position.getxPosition());
         Assertions.assertEquals(10,position.getyPosition());
+        testFloor=new Floor();
+        testFloor.initializeFloor(20);
+        for(int i = 0; i <=10; i++) {
+            testFloor.getFloor()[testFloor.getFloorSize()-1][i]=1;
+        }
+            for(int i = 0; i <= floor.getFloorSize() - 1; i++){
+            for(int j = 0; j <= floor.getFloorSize() - 1; j++){
+                assertEquals(floor.getFloor()[i][j],  testFloor.getFloor()[i][j]);
+            }
+        }
 
         //(A2,B1,C1,D2)
         floor = new Floor();
@@ -51,22 +75,44 @@ public class MoveTestSalma {
         //(A2,B2,C2,D2)
         robot=new Robot(floor);
         robot.setCurrentPosition(new Position(10,10));
+        robot.penDown();
         robot.turnRight();
         robot.turnRight();
         Assertions.assertEquals(Robot.Orientation.SOUTH,robot.getOrientation());
         position=robot.moveForward(2);
         Assertions.assertEquals(10,position.getxPosition());
         Assertions.assertEquals(8,position.getyPosition());
-
+        testFloor=new Floor();
+        testFloor.initializeFloor(20);
+        for(int i = 8; i <=10; i++) {
+            testFloor.getFloor()[10][i]=1;
+        }
+        for(int i = 0; i <= floor.getFloorSize() - 1; i++){
+            for(int j = 0; j <= floor.getFloorSize() - 1; j++){
+                assertEquals(floor.getFloor()[i][j],  testFloor.getFloor()[i][j]);
+            }
+        }
         //(A2,B2,C3,D2)
+        floor = new Floor();
+        floor.initializeFloor(20);
         robot=new Robot(floor);
         robot.setCurrentPosition(new Position(10,10));
+        robot.penDown();
         robot.turnRight();
         Assertions.assertEquals(Robot.Orientation.EAST,robot.getOrientation());
         position=robot.moveForward(2);
         Assertions.assertEquals(12,position.getxPosition());
         Assertions.assertEquals(10,position.getyPosition());
-
+        testFloor=new Floor();
+        testFloor.initializeFloor(20);
+        for(int i = 10; i <=12; i++) {
+            testFloor.getFloor()[i][10]=1;
+        }
+        for(int i = 0; i <= floor.getFloorSize() - 1; i++){
+            for(int j = 0; j <= floor.getFloorSize() - 1; j++){
+                assertEquals(floor.getFloor()[i][j],  testFloor.getFloor()[i][j]);
+            }
+        }
 
     }
 }
