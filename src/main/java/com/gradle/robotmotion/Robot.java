@@ -170,7 +170,7 @@ public class Robot {
             return currentPosition;
         }
         else{
-            currentPosition.setxPosition(currentPosition.getyPosition() - spaces);
+            currentPosition.setxPosition(currentPosition.getxPosition() - spaces);
         }
         return currentPosition;
     }

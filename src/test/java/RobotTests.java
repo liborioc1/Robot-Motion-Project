@@ -319,12 +319,111 @@ public class RobotTests {
         }
         //(A2,B2,C1,D5) covered by decoder
 
-
+        // ==========================Pen Up Tests==============================
         //(A1,B1,C4,D4)
+        floor = new Floor();
+        floor.initializeFloor(20);
+        robot = new Robot(floor);
+        robot.setCurrentPosition(new Position(0,19));
+        Assertions.assertEquals(0,robot.getCurrentPosition().getxPosition());
+        Assertions.assertEquals(19,robot.getCurrentPosition().getyPosition());
+        robot.penUp();
+        robot.turnLeft();
+        Assertions.assertEquals(Robot.Orientation.WEST,robot.getOrientation());
+        position=robot.moveForward(23);
+        Assertions.assertEquals(0,position.getxPosition());
+        Assertions.assertEquals(19,position.getyPosition());
+        int[][] map1 = floor.getFloor();
+
+        for(int i = 0; i <= floor.getFloorSize() - 1; i++){
+            for(int j = 0; j <= floor.getFloorSize() - 1; j++){
+                assertEquals(map1[i][j], 0);
+            }
+        }
+
         //(A1,B1,C1,D4)
+        floor = new Floor();
+        floor.initializeFloor(20);
+        robot=new Robot(floor);
+        robot.setCurrentPosition(new Position(0,19));
+        Assertions.assertEquals(0,robot.getCurrentPosition().getxPosition());
+        Assertions.assertEquals(19,robot.getCurrentPosition().getyPosition());
+        robot.penUp();
+        Assertions.assertEquals(Robot.Orientation.NORTH,robot.getOrientation());
+        position=robot.moveForward(2);
+        Assertions.assertEquals(0,position.getxPosition());
+        Assertions.assertEquals(19,position.getyPosition());
+        int[][] map2 = floor.getFloor();
+
+        for(int i = 0; i <= floor.getFloorSize() - 1; i++){
+            for(int j = 0; j <= floor.getFloorSize() - 1; j++){
+                assertEquals(map2[i][j], 0);
+            }
+        }
+
         //(A1,B1,C2,D4)
+        floor = new Floor();
+        floor.initializeFloor(20);
+        robot=new Robot(floor);
+        robot.setCurrentPosition(new Position(0,19));
+        Assertions.assertEquals(0,robot.getCurrentPosition().getxPosition());
+        Assertions.assertEquals(19,robot.getCurrentPosition().getyPosition());
+        robot.penUp();
+        robot.turnRight();
+        robot.turnRight();
+        Assertions.assertEquals(Robot.Orientation.SOUTH,robot.getOrientation());
+        position=robot.moveForward(23);
+        Assertions.assertEquals(0,position.getxPosition());
+        Assertions.assertEquals(19,position.getyPosition());
+        int[][] map3 = floor.getFloor();
+
+        for(int i = 0; i <= floor.getFloorSize() - 1; i++){
+            for(int j = 0; j <= floor.getFloorSize() - 1; j++){
+                assertEquals(map3[i][j], 0);
+            }
+        }
+
         //(A1,B1,C3,D4)
+        floor = new Floor();
+        floor.initializeFloor(20);
+        robot=new Robot(floor);
+        robot.setCurrentPosition(new Position(0,19));
+        Assertions.assertEquals(0,robot.getCurrentPosition().getxPosition());
+        Assertions.assertEquals(19,robot.getCurrentPosition().getyPosition());
+        robot.penUp();
+        robot.turnRight();
+        Assertions.assertEquals(Robot.Orientation.EAST,robot.getOrientation());
+        position=robot.moveForward(23);
+        Assertions.assertEquals(0,position.getxPosition());
+        Assertions.assertEquals(19,position.getyPosition());
+        int[][] map4 = floor.getFloor();
+
+        for(int i = 0; i <= floor.getFloorSize() - 1; i++){
+            for(int j = 0; j <= floor.getFloorSize() - 1; j++){
+                assertEquals(map4[i][j], 0);
+            }
+        }
+
         //(A1,B1,C4,D1)
+        floor = new Floor();
+        floor.initializeFloor(20);
+        robot=new Robot(floor);
+        robot.setCurrentPosition(new Position(0,19));
+        Assertions.assertEquals(0,robot.getCurrentPosition().getxPosition());
+        Assertions.assertEquals(19,robot.getCurrentPosition().getyPosition());
+        robot.penUp();
+        robot.turnLeft();
+        Assertions.assertEquals(Robot.Orientation.WEST,robot.getOrientation());
+        position=robot.moveForward(0);
+        Assertions.assertEquals(0,position.getxPosition());
+        Assertions.assertEquals(19,position.getyPosition());
+        int[][] map5 = floor.getFloor();
+
+        for(int i = 0; i <= floor.getFloorSize() - 1; i++){
+            for(int j = 0; j <= floor.getFloorSize() - 1; j++){
+                assertEquals(map5[i][j], 0);
+            }
+        }
 
     }
 
