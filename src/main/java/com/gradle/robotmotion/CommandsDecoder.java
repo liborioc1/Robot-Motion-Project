@@ -46,6 +46,9 @@ public class CommandsDecoder {
                         robot.moveForward(number);
                         break;
                     case "i":
+                        if(floor.getFloorSize() != 0){
+                            robot = new Robot(floor);
+                        }
                         floor.initializeFloor(number);
                         break;
                     default:

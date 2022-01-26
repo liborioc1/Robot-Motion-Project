@@ -31,7 +31,6 @@ public class CommandsDecoderTests {
     @Test
     public void testDecodeCommand()
     {
-        //TODO test negative, decimal etc
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
@@ -99,6 +98,22 @@ public class CommandsDecoderTests {
         String expectedOutput3  = "Invalid Input Format or Incorrect Command or Value(must be <= 40)\r\nInvalid Input Format or Incorrect Command or Value(must be <= 40)\r\nInvalid Input Format or Incorrect Command or Value(must be <= 40)\r\nInvalid Input Format. Please Check Spaces\r\n";
         assertEquals(expectedOutput3, outContent3.toString());
 
+        commandsDecoder.decodeCommand("i 3");
+        outContent1 = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent1));
+        commandsDecoder.decodeCommand("p");
+        String expectedOutput4  =
+                "Floor is of size: 3 x 3\r\n" +
+                        "2            \r\n" +
+                        "1            \r\n" +
+                        "0            \r\n" +
+                        "    0  1  2  \r\n";
+        assertEquals(expectedOutput4, outContent1.toString());
+        Assertions.assertEquals(3,floor.getFloorSize());
+        position=new Position(0,0);
+        Assertions.assertEquals(position.toString(),commandsDecoder.getRobot().getCurrentPosition().toString());
+        Assertions.assertEquals(Robot.Orientation.NORTH, commandsDecoder.getRobot().getOrientation());
+        Assertions.assertTrue(commandsDecoder.getRobot().getPenUp());
     }
 
     @AfterAll
