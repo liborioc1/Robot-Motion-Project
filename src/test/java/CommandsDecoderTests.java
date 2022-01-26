@@ -50,17 +50,17 @@ public class CommandsDecoderTests {
         commandsDecoder.decodeCommand("p");
         String expectedOutput  =
                 "Floor is of size: 10 x 10\r\n" +
-                        "9                     \r\n" +
-                        "8                     \r\n" +
-                        "7                     \r\n" +
-                        "6                     \r\n" +
-                        "5                     \r\n" +
-                        "4                     \r\n" +
-                        "3                     \r\n" +
-                        "2                     \r\n" +
-                        "1                     \r\n" +
-                        "0                     \r\n" +
-                        "  0 1 2 3 4 5 6 7 8 9 \r\n";
+                        "9                                 \r\n" +
+                        "8                                 \r\n" +
+                        "7                                 \r\n" +
+                        "6                                 \r\n" +
+                        "5                                 \r\n" +
+                        "4                                 \r\n" +
+                        "3                                 \r\n" +
+                        "2                                 \r\n" +
+                        "1                                 \r\n" +
+                        "0                                 \r\n" +
+                        "    0  1  2  3  4  5  6  7  8  9  \r\n";
         assertEquals(expectedOutput, outContent.toString());
         Assertions.assertEquals(10,floor.getFloorSize());
 
@@ -86,7 +86,7 @@ public class CommandsDecoderTests {
         commandsDecoder.decodeCommand("invalid command");
         commandsDecoder.decodeCommand("s");
 
-        String expectedOutput2  = "Invalid Input Format. Please Check Spaces\r\nInvalid Input Format. Please Check Spaces\r\n";
+        String expectedOutput2  = "Invalid Input Format or Incorrect Command or Value(must be <= 40)\r\nInvalid Input Format. Please Check Spaces\r\n";
         assertEquals(expectedOutput2, outContent2.toString());
 
     }

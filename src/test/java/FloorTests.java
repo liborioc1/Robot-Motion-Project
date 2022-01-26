@@ -19,7 +19,6 @@ public class FloorTests {
                 assertEquals(0, floor.getFloor()[i][j]);
             }
         }
-
     }
 
     @Test
