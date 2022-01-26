@@ -19,6 +19,10 @@ public class CommandsDecoder {
         this.flag=flag;
     }
 
+    public Robot getRobot()
+    {
+        return robot;
+    }
     public void decodeCommand(String command)
     {
 
