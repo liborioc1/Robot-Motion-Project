@@ -19,6 +19,16 @@ public class FloorTests {
                 assertEquals(0, floor.getFloor()[i][j]);
             }
         }
+
+        floor = new Floor();
+        floor.initializeFloor(0);
+        assertEquals(0, floor.getFloorSize());
+
+        for(int i = 0; i <= floor.getFloorSize() - 1; i++){
+            for(int j = 0; j <= floor.getFloorSize() - 1; j++){
+                assertEquals(0, floor.getFloor()[i][j]);
+            }
+        }
     }
 
     @Test

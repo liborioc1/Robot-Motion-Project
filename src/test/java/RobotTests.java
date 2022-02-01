@@ -22,7 +22,6 @@ public class RobotTests {
         floor = new Floor();
         robot=new Robot(floor);
         floor.initializeFloor(10);
-
         Assertions.assertEquals(Robot.Orientation.NORTH, robot.getOrientation());
     }
 
@@ -44,6 +43,10 @@ public class RobotTests {
 
         Position defaultPosition = new Position(0,0);
         Assertions.assertEquals(defaultPosition.toString(), robot.getCurrentPosition().toString());
+
+        Position position = new Position(9,9);
+        robot.setCurrentPosition(new Position(9,9));
+        Assertions.assertEquals(position.toString(), robot.getCurrentPosition().toString());
     }
 
     @Test
@@ -60,6 +63,7 @@ public class RobotTests {
         Assertions.assertEquals(Robot.Orientation.WEST,robot.getOrientation());
         robot.turnRight();
         Assertions.assertEquals(Robot.Orientation.NORTH,robot.getOrientation());
+
     }
 
     @Test
@@ -87,6 +91,10 @@ public class RobotTests {
         robot.penUp();
         Assertions.assertTrue(robot.getPenUp());
 
+        robot.penDown();
+        robot.penUp();
+        Assertions.assertTrue(robot.getPenUp());
+
     }
 
     @Test
@@ -96,7 +104,11 @@ public class RobotTests {
         floor.initializeFloor(10);
 
         robot.penDown();
+        robot.penDown();
         Assertions.assertFalse(robot.getPenUp());
+
+        robot.penDown();
+        Assertions.assertTrue(robot.getPenUp());
 
     }
 
