@@ -31,7 +31,7 @@ public class CommandsDecoderTests {
     @Test
     public void testDecodeCommand()
     {
-
+        //t0
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         commandsDecoder.decodeCommand("m 3");
@@ -41,10 +41,12 @@ public class CommandsDecoderTests {
         String expectedOutput  = "Floor has not been initialized. Floor must be initialized to perform requested move\r\nInvalid Input Format. Please Check Spaces\r\nFloor has not been initialized. Floor must be initialized to perform requested move\r\n";
         assertEquals(expectedOutput, outContent.toString());
 
+        //t8
         //check that quit sets q
         commandsDecoder.decodeCommand("q");
         Assertions.assertFalse(flag.get());
 
+        //t1
         //check board initialization and print
         commandsDecoder.decodeCommand("i 10");
         ByteArrayOutputStream outContent1 = new ByteArrayOutputStream();
@@ -66,29 +68,37 @@ public class CommandsDecoderTests {
         assertEquals(expectedOutput1, outContent1.toString());
         Assertions.assertEquals(10,floor.getFloorSize());
 
+        //t55
         //test move decoding
         commandsDecoder.decodeCommand("m 2");
         Position position=new Position(0,2);
         Assertions.assertEquals(position.toString(),robot.getCurrentPosition().toString());
 
+        //t2
         commandsDecoder.decodeCommand("u");
         Assertions.assertTrue(robot.getPenUp());
 
+        //t3
         commandsDecoder.decodeCommand("d");
         Assertions.assertFalse(robot.getPenUp());
 
+        //t4
         commandsDecoder.decodeCommand("r");
         Assertions.assertEquals(Robot.Orientation.EAST,robot.getOrientation());
+        //t5
         commandsDecoder.decodeCommand("l");
         Assertions.assertEquals(Robot.Orientation.NORTH,robot.getOrientation());
 
 
+        //t6
         ByteArrayOutputStream outContent2 = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent2));
         commandsDecoder.decodeCommand("c");
         String expectedOutput2  =commandsDecoder.getRobot().printCurrentPosition()+"\r\n";
         assertEquals(expectedOutput2, outContent2.toString());
 
+        //t10
+        //t11
         ByteArrayOutputStream outContent3 = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent3));
         commandsDecoder.decodeCommand("m -20");
@@ -98,9 +108,11 @@ public class CommandsDecoderTests {
         String expectedOutput3  = "Invalid Input Format or Incorrect Command or Value(must be <= 40)\r\nInvalid Input Format or Incorrect Command or Value(must be <= 40)\r\nInvalid Input Format or Incorrect Command or Value(must be <= 40)\r\nInvalid Input Format. Please Check Spaces\r\n";
         assertEquals(expectedOutput3, outContent3.toString());
 
+        //t54
         commandsDecoder.decodeCommand("i 3");
         outContent1 = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent1));
+        //t9
         commandsDecoder.decodeCommand("p");
         String expectedOutput4  =
                 "Floor is of size: 3 x 3\r\n" +
