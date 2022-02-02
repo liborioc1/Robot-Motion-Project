@@ -112,7 +112,7 @@ public class RobotTests {
         floor.initializeFloor(10);
 
         robot.penDown();
-        Assertions.assertTrue(robot.getPenUp());
+        Assertions.assertFalse(robot.getPenUp());
 
         //t36
         robot.penDown();
