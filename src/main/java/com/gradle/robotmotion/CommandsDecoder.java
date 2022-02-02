@@ -28,7 +28,7 @@ public class CommandsDecoder {
 
         command=command.toLowerCase();
 
-        if(command.matches("^[a-zA-Z]{1}\\s{1}([0-9]|[1-3][0-9]|40){0,1}$"))
+        if(command.matches("^[a-zA-Z]{1}\\s{1}([0-9]|[1-3][0-9]|40){1}$"))
         {
 
             String letter=command.split(" ")[0];
