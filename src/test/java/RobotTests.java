@@ -1,24 +1,20 @@
 import com.gradle.robotmotion.Floor;
 import com.gradle.robotmotion.Position;
 import com.gradle.robotmotion.Robot;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 public class RobotTests {
 
     static Floor floor;
     static Robot robot;
 
-    //TODO BeforeEach and AfterEach
+
 
     @Test
     public void testGetOrientation(){
+        //t21
         floor = new Floor();
         robot=new Robot(floor);
         floor.initializeFloor(10);
@@ -27,16 +23,17 @@ public class RobotTests {
 
     @Test
     public void testGetPenUp(){
+        //t22
         floor = new Floor();
         robot=new Robot(floor);
         floor.initializeFloor(10);
-
         Assertions.assertTrue(robot.getPenUp());
     }
 
 
     @Test
     public void testGetCurrentPosition(){
+        //t23
         floor = new Floor();
         robot=new Robot(floor);
         floor.initializeFloor(10);
@@ -44,6 +41,7 @@ public class RobotTests {
         Position defaultPosition = new Position(0,0);
         Assertions.assertEquals(defaultPosition.toString(), robot.getCurrentPosition().toString());
 
+        //t24
         Position position = new Position(9,9);
         robot.setCurrentPosition(new Position(9,9));
         Assertions.assertEquals(position.toString(), robot.getCurrentPosition().toString());
@@ -51,16 +49,20 @@ public class RobotTests {
 
     @Test
     public void testTurnRight(){
+        //t25
         floor = new Floor();
         robot=new Robot(floor);
         floor.initializeFloor(10);
 
         robot.turnRight();
         Assertions.assertEquals(Robot.Orientation.EAST,robot.getOrientation());
+        //t26
         robot.turnRight();
         Assertions.assertEquals(Robot.Orientation.SOUTH,robot.getOrientation());
+        //t27
         robot.turnRight();
         Assertions.assertEquals(Robot.Orientation.WEST,robot.getOrientation());
+        //t28
         robot.turnRight();
         Assertions.assertEquals(Robot.Orientation.NORTH,robot.getOrientation());
 
@@ -68,29 +70,34 @@ public class RobotTests {
 
     @Test
     public void testTurnLeft(){
+        //t29
         floor = new Floor();
         robot=new Robot(floor);
         floor.initializeFloor(10);
 
         robot.turnLeft();
         Assertions.assertEquals(Robot.Orientation.WEST,robot.getOrientation());
+        //t30
         robot.turnLeft();
         Assertions.assertEquals(Robot.Orientation.SOUTH,robot.getOrientation());
+        //t31
         robot.turnLeft();
         Assertions.assertEquals(Robot.Orientation.EAST,robot.getOrientation());
+        //t32
         robot.turnLeft();
         Assertions.assertEquals(Robot.Orientation.NORTH,robot.getOrientation());
     }
 
     @Test
     public void testPenUp() {
+        //t33
         floor = new Floor();
         robot=new Robot(floor);
         floor.initializeFloor(10);
 
         robot.penUp();
         Assertions.assertTrue(robot.getPenUp());
-
+        //t34
         robot.penDown();
         robot.penUp();
         Assertions.assertTrue(robot.getPenUp());
@@ -99,21 +106,24 @@ public class RobotTests {
 
     @Test
     public void testPenDown() {
+        //t35
         floor = new Floor();
         robot=new Robot(floor);
         floor.initializeFloor(10);
 
         robot.penDown();
+        Assertions.assertTrue(robot.getPenUp());
+
+        //t36
+        robot.penDown();
         robot.penDown();
         Assertions.assertFalse(robot.getPenUp());
-
-        robot.penDown();
-        Assertions.assertTrue(robot.getPenUp());
 
     }
 
     @Test
     public void testPrintCurrentPosition() {
+        //t37
         floor = new Floor();
         robot=new Robot(floor);
         floor.initializeFloor(10);
@@ -121,6 +131,7 @@ public class RobotTests {
         robot.penUp();
         Assertions.assertEquals("Position: {0,0} - Pen: Up - Facing: NORTH",robot.printCurrentPosition());
 
+        //t38
         robot.penDown();
         Assertions.assertEquals("Position: {0,0} - Pen: Down - Facing: NORTH",robot.printCurrentPosition());
 
@@ -134,7 +145,7 @@ public class RobotTests {
         floor.initializeFloor(20);
         Robot robot=new Robot(floor);
 
-        // (A2,B2,C1,D2)
+        //t39 -> (A2,B2,C1,D2)
 
         robot.setCurrentPosition(new Position(10,10));
         Assertions.assertEquals(10,robot.getCurrentPosition().getxPosition());
@@ -154,7 +165,7 @@ public class RobotTests {
             }
         }
 
-        // (A3,B2,C1,D2)
+        //t40 -> (A3,B2,C1,D2)
 
         floor = new Floor();
         floor.initializeFloor(20);
@@ -175,7 +186,7 @@ public class RobotTests {
             }
         }
 
-        //(A2,B1,C1,D2)
+        //t41 -> (A2,B1,C1,D2)
 
         floor = new Floor();
         floor.initializeFloor(20);
@@ -193,7 +204,7 @@ public class RobotTests {
             }
         }
 
-        //(A2,B2,C2,D2)
+        //t42 -> (A2,B2,C2,D2)
 
         robot=new Robot(floor);
         robot.setCurrentPosition(new Position(10,10));
@@ -215,7 +226,7 @@ public class RobotTests {
             }
         }
 
-        //(A2,B2,C3,D2)
+        //t43 -> (A2,B2,C3,D2)
 
         floor = new Floor();
         floor.initializeFloor(20);
@@ -238,7 +249,7 @@ public class RobotTests {
             }
         }
 
-        //(A2,B2,C4,D2)
+        //t44 -> (A2,B2,C4,D2)
 
         floor = new Floor();
         floor.initializeFloor(20);
@@ -261,7 +272,7 @@ public class RobotTests {
             }
         }
 
-        //(A2,B2,C1,D1)
+        //t45 -> (A2,B2,C1,D1)
 
         floor = new Floor();
         floor.initializeFloor(20);
@@ -284,7 +295,7 @@ public class RobotTests {
             }
         }
 
-        //(A2,B2,C1,D3)
+        //t46 -> (A2,B2,C1,D3)
 
         floor = new Floor();
         floor.initializeFloor(20);
@@ -307,7 +318,7 @@ public class RobotTests {
             }
         }
 
-        //(A2,B2,C1,D4)
+        //t47 -> (A2,B2,C1,D4)
 
         floor = new Floor();
         floor.initializeFloor(20);
@@ -329,10 +340,10 @@ public class RobotTests {
                 assertEquals(floor.getFloor()[i][j],  testFloor.getFloor()[i][j]);
             }
         }
-        //(A2,B2,C1,D5) covered by decoder
+        //t48 -> (A2,B2,C1,D5) covered by decoder
 
         // ==========================Pen Up Tests==============================
-        //(A1,B1,C4,D4)
+        //t49 -> (A1,B1,C4,D4)
         floor = new Floor();
         floor.initializeFloor(20);
         robot = new Robot(floor);
@@ -353,7 +364,7 @@ public class RobotTests {
             }
         }
 
-        //(A1,B1,C1,D4)
+        //t50 -> (A1,B1,C1,D4)
         floor = new Floor();
         floor.initializeFloor(20);
         robot=new Robot(floor);
@@ -373,7 +384,7 @@ public class RobotTests {
             }
         }
 
-        //(A1,B1,C2,D4)
+        //t51 -> (A1,B1,C2,D4)
         floor = new Floor();
         floor.initializeFloor(20);
         robot=new Robot(floor);
@@ -395,7 +406,7 @@ public class RobotTests {
             }
         }
 
-        //(A1,B1,C3,D4)
+        //t52 -> (A1,B1,C3,D4)
         floor = new Floor();
         floor.initializeFloor(20);
         robot=new Robot(floor);
@@ -416,7 +427,7 @@ public class RobotTests {
             }
         }
 
-        //(A1,B1,C4,D1)
+        //t53 -> (A1,B1,C4,D1)
         floor = new Floor();
         floor.initializeFloor(20);
         robot=new Robot(floor);

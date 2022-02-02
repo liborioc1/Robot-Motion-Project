@@ -10,6 +10,8 @@ public class FloorTests {
 
     @Test
     public void testInitializeFloor(){
+
+        //t12
         Floor floor = new Floor();
         floor.initializeFloor(10);
         assertEquals(10, floor.getFloorSize());
@@ -19,7 +21,7 @@ public class FloorTests {
                 assertEquals(0, floor.getFloor()[i][j]);
             }
         }
-
+        //t13
         floor = new Floor();
         floor.initializeFloor(0);
         assertEquals(0, floor.getFloorSize());
@@ -33,6 +35,7 @@ public class FloorTests {
 
     @Test
     public void testGetFloor(){
+        //t14
         Floor floor = new Floor();
         floor.initializeFloor(3);
         int[][] map = new int[3][3];
@@ -47,6 +50,7 @@ public class FloorTests {
 
     @Test
     public void testGetFloorSize(){
+        //t15
         Floor floor = new Floor();
         assertEquals(0, floor.getFloorSize());
     }
@@ -54,6 +58,7 @@ public class FloorTests {
 
     @Test
     public void printTest(){
+        //t16
         Floor floor = new Floor();
         floor.initializeFloor(10);
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -74,7 +79,7 @@ public class FloorTests {
                 "    0  1  2  3  4  5  6  7  8  9  \r\n";
         assertEquals(expectedOutput, outContent.toString());
 
-
+        //t17
         for(int i = 0; i <= floor.getFloorSize() - 1; i++){
             for(int j = 0; j <= floor.getFloorSize() - 1; j++){
                 floor.getFloor()[i][j] = 1;
@@ -98,7 +103,7 @@ public class FloorTests {
                         "    0  1  2  3  4  5  6  7  8  9  \r\n";
         assertEquals(expectedOutput, outContent.toString());
 
-
+        //t18
         for(int i = 0; i <= 4; i++){
             for(int j = 0; j <= 2; j++){
                 floor.getFloor()[i][j] = 0;
@@ -122,7 +127,7 @@ public class FloorTests {
                         "    0  1  2  3  4  5  6  7  8  9  \r\n";
         assertEquals(expectedOutput, outContent.toString());
 
-
+        //t19
         floor = new Floor();
         floor.initializeFloor(15);
         outContent = new ByteArrayOutputStream();
@@ -148,7 +153,7 @@ public class FloorTests {
                         "    0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  \r\n";
         assertEquals(expectedOutput, outContent.toString());
 
-
+        //t20
         for(int i = 0; i <= floor.getFloorSize() - 1; i++){
             for(int j = 0; j <= floor.getFloorSize() - 1; j++){
                 floor.getFloor()[i][j] = 1;
