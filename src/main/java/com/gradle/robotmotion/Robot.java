@@ -32,36 +32,63 @@ public class Robot {
     }
 
     public void turnRight() {
-        switch (orientation) {
-            case NORTH:
-                orientation = Orientation.EAST;
-                break;
-            case SOUTH:
-                orientation = Orientation.WEST;
-                break;
-            case EAST:
-                orientation = Orientation.SOUTH;
-                break;
-            case WEST:
-                orientation = Orientation.NORTH;
-                break;
+//        switch (orientation) {
+//            case NORTH:
+//                orientation = Orientation.EAST;
+//                break;
+//            case SOUTH:
+//                orientation = Orientation.WEST;
+//                break;
+//            case EAST:
+//                orientation = Orientation.SOUTH;
+//                break;
+//            case WEST:
+//                orientation = Orientation.NORTH;
+//                break;
+//        }
+
+        if(orientation == Orientation.NORTH){
+            orientation = Orientation.EAST;
         }
+        else if(orientation == Orientation.SOUTH){
+            orientation = Orientation.WEST;
+        }
+        else if(orientation == Orientation.EAST){
+            orientation = Orientation.SOUTH;
+        }
+        else {
+            orientation = Orientation.NORTH;
+        }
+
     }
 
     public void turnLeft() {
-        switch (orientation) {
-            case SOUTH:
-                orientation = Orientation.EAST;
-                break;
-            case NORTH:
-                orientation = Orientation.WEST;
-                break;
-            case WEST:
-                orientation = Orientation.SOUTH;
-                break;
-            case EAST:
-                orientation = Orientation.NORTH;
-                break;
+//        switch (orientation) {
+//            case SOUTH:
+//                orientation = Orientation.EAST;
+//                break;
+//            case NORTH:
+//                orientation = Orientation.WEST;
+//                break;
+//            case WEST:
+//                orientation = Orientation.SOUTH;
+//                break;
+//            case EAST:
+//                orientation = Orientation.NORTH;
+//                break;
+//        }
+
+        if(orientation == Orientation.SOUTH){
+            orientation = Orientation.EAST;
+        }
+        else if(orientation == Orientation.NORTH){
+            orientation = Orientation.WEST;
+        }
+        else if(orientation == Orientation.WEST){
+            orientation = Orientation.SOUTH;
+        }
+        else {
+            orientation = Orientation.NORTH;
         }
     }
 
@@ -86,48 +113,88 @@ public class Robot {
 
     public Position moveForward(int spaces){
 
-        switch (orientation){
-            case SOUTH:
-                if(penUp){
-                    setPositionOnSouthMovement(spaces);
-                }
-                else{
-                    Position previousPosition = new Position(currentPosition);
-                    Position newPosition = setPositionOnSouthMovement(spaces);
-                    setFloorWhenSouthMovementPenDown(previousPosition, newPosition);
-                }
-                break;
-            case NORTH:
-                if(penUp){
-                    setPositionOnNorthMovement(spaces);
-                }
-                else{
-                    Position previousPosition = new Position(currentPosition);
-                    Position newPosition = setPositionOnNorthMovement(spaces);
-                    setFloorWhenNorthMovementPenDown(previousPosition, newPosition);
-                }
-                break;
-            case WEST:
-                if(penUp){
-                    setPositionOnWestMovement(spaces);
-                }
-                else{
-                    Position previousPosition = new Position(currentPosition);
-                    Position newPosition = setPositionOnWestMovement(spaces);
-                    setFloorWhenWestMovementPenDown(previousPosition, newPosition);
-                }
-                break;
-            case EAST:
-                if(penUp){
-                    setPositionOnEastMovement(spaces);
-                }
-                else{
-                    Position previousPosition = new Position(currentPosition);
-                    Position newPosition = setPositionOnEastMovement(spaces);
-                    setFloorWhenEastMovementPenDown(previousPosition, newPosition);
-                }
-                break;
+        if(orientation == Orientation.SOUTH){
+            if(penUp){
+                setPositionOnSouthMovement(spaces);
+            }
+            else{
+                Position previousPosition = new Position(currentPosition);
+                Position newPosition = setPositionOnSouthMovement(spaces);
+                setFloorWhenSouthMovementPenDown(previousPosition, newPosition);
+            }
         }
+        else if(orientation == Orientation.NORTH){
+            if(penUp){
+                setPositionOnNorthMovement(spaces);
+            }
+            else{
+                Position previousPosition = new Position(currentPosition);
+                Position newPosition = setPositionOnNorthMovement(spaces);
+                setFloorWhenNorthMovementPenDown(previousPosition, newPosition);
+            }
+        }
+        else if(orientation == Orientation.WEST){
+            if(penUp){
+                setPositionOnWestMovement(spaces);
+            }
+            else{
+                Position previousPosition = new Position(currentPosition);
+                Position newPosition = setPositionOnWestMovement(spaces);
+                setFloorWhenWestMovementPenDown(previousPosition, newPosition);
+            }
+        }
+        else {
+            if(penUp){
+                setPositionOnEastMovement(spaces);
+            }
+            else{
+                Position previousPosition = new Position(currentPosition);
+                Position newPosition = setPositionOnEastMovement(spaces);
+                setFloorWhenEastMovementPenDown(previousPosition, newPosition);
+            }
+        }
+//        switch (orientation){
+//            case SOUTH:
+//                if(penUp){
+//                    setPositionOnSouthMovement(spaces);
+//                }
+//                else{
+//                    Position previousPosition = new Position(currentPosition);
+//                    Position newPosition = setPositionOnSouthMovement(spaces);
+//                    setFloorWhenSouthMovementPenDown(previousPosition, newPosition);
+//                }
+//                break;
+//            case NORTH:
+//                if(penUp){
+//                    setPositionOnNorthMovement(spaces);
+//                }
+//                else{
+//                    Position previousPosition = new Position(currentPosition);
+//                    Position newPosition = setPositionOnNorthMovement(spaces);
+//                    setFloorWhenNorthMovementPenDown(previousPosition, newPosition);
+//                }
+//                break;
+//            case WEST:
+//                if(penUp){
+//                    setPositionOnWestMovement(spaces);
+//                }
+//                else{
+//                    Position previousPosition = new Position(currentPosition);
+//                    Position newPosition = setPositionOnWestMovement(spaces);
+//                    setFloorWhenWestMovementPenDown(previousPosition, newPosition);
+//                }
+//                break;
+//            case EAST:
+//                if(penUp){
+//                    setPositionOnEastMovement(spaces);
+//                }
+//                else{
+//                    Position previousPosition = new Position(currentPosition);
+//                    Position newPosition = setPositionOnEastMovement(spaces);
+//                    setFloorWhenEastMovementPenDown(previousPosition, newPosition);
+//                }
+//                break;
+//        }
         return currentPosition;
     }
 
