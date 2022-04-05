@@ -38,7 +38,7 @@ public class CommandsDecoderTests {
         commandsDecoder.decodeCommand("s 2");
         commandsDecoder.decodeCommand("r");
         //check 3 prints of floor must be initialized
-        String expectedOutput  = "Floor has not been initialized. Floor must be initialized to perform requested move\r\nInvalid Input Format. Please Check Spaces\r\nFloor has not been initialized. Floor must be initialized to perform requested move\r\n";
+        String expectedOutput  = "Floor has not been initialized. Floor must be initialized to perform requested move\r\nInvalid Input Format. Please Check Spaces\r\nFloor has not been initialized. Floor must be initialized to perform requested command\r\n";
         assertEquals(expectedOutput, outContent.toString());
 
         //t8

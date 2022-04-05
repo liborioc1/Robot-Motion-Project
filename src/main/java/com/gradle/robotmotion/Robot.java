@@ -1,15 +1,19 @@
 package com.gradle.robotmotion;
 
-public class Robot {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-    //TODO extract interface for requirements
-    //TODO redefine the requirements
+public class Robot {
 
     private boolean penUp;
     private Position currentPosition;
     public enum Orientation {NORTH, SOUTH, EAST, WEST}
     private Orientation orientation;
     Floor floor;
+    public static List<String> historyOfCommands = Collections.synchronizedList(new ArrayList<String>());
 
 
     public Robot(Floor f) {
@@ -32,21 +36,6 @@ public class Robot {
     }
 
     public void turnRight() {
-//        switch (orientation) {
-//            case NORTH:
-//                orientation = Orientation.EAST;
-//                break;
-//            case SOUTH:
-//                orientation = Orientation.WEST;
-//                break;
-//            case EAST:
-//                orientation = Orientation.SOUTH;
-//                break;
-//            case WEST:
-//                orientation = Orientation.NORTH;
-//                break;
-//        }
-
         if(orientation == Orientation.NORTH){
             orientation = Orientation.EAST;
         }
@@ -63,20 +52,6 @@ public class Robot {
     }
 
     public void turnLeft() {
-//        switch (orientation) {
-//            case SOUTH:
-//                orientation = Orientation.EAST;
-//                break;
-//            case NORTH:
-//                orientation = Orientation.WEST;
-//                break;
-//            case WEST:
-//                orientation = Orientation.SOUTH;
-//                break;
-//            case EAST:
-//                orientation = Orientation.NORTH;
-//                break;
-//        }
 
         if(orientation == Orientation.SOUTH){
             orientation = Orientation.EAST;
@@ -153,48 +128,6 @@ public class Robot {
                 setFloorWhenEastMovementPenDown(previousPosition, newPosition);
             }
         }
-//        switch (orientation){
-//            case SOUTH:
-//                if(penUp){
-//                    setPositionOnSouthMovement(spaces);
-//                }
-//                else{
-//                    Position previousPosition = new Position(currentPosition);
-//                    Position newPosition = setPositionOnSouthMovement(spaces);
-//                    setFloorWhenSouthMovementPenDown(previousPosition, newPosition);
-//                }
-//                break;
-//            case NORTH:
-//                if(penUp){
-//                    setPositionOnNorthMovement(spaces);
-//                }
-//                else{
-//                    Position previousPosition = new Position(currentPosition);
-//                    Position newPosition = setPositionOnNorthMovement(spaces);
-//                    setFloorWhenNorthMovementPenDown(previousPosition, newPosition);
-//                }
-//                break;
-//            case WEST:
-//                if(penUp){
-//                    setPositionOnWestMovement(spaces);
-//                }
-//                else{
-//                    Position previousPosition = new Position(currentPosition);
-//                    Position newPosition = setPositionOnWestMovement(spaces);
-//                    setFloorWhenWestMovementPenDown(previousPosition, newPosition);
-//                }
-//                break;
-//            case EAST:
-//                if(penUp){
-//                    setPositionOnEastMovement(spaces);
-//                }
-//                else{
-//                    Position previousPosition = new Position(currentPosition);
-//                    Position newPosition = setPositionOnEastMovement(spaces);
-//                    setFloorWhenEastMovementPenDown(previousPosition, newPosition);
-//                }
-//                break;
-//        }
         return currentPosition;
     }
 
@@ -202,6 +135,7 @@ public class Robot {
     public Position setPositionOnSouthMovement(int spaces){
         if(currentPosition.getyPosition() - spaces < 0){
             System.out.println("Number of spaces for movement is too large");
+            historyOfCommands.remove(historyOfCommands.size()-1);
             return currentPosition;
         }
         else{
@@ -218,6 +152,7 @@ public class Robot {
     public Position setPositionOnNorthMovement(int spaces){
         if(currentPosition.getyPosition() + spaces > floor.getFloorSize() - 1){
             System.out.println("Number of spaces for movement is too large");
+            historyOfCommands.remove(historyOfCommands.size()-1);
             return currentPosition;
         }
         else{
@@ -234,6 +169,7 @@ public class Robot {
     public Position setPositionOnWestMovement(int spaces){
         if(currentPosition.getxPosition() - spaces < 0){
             System.out.println("Number of spaces for movement is too large");
+            historyOfCommands.remove(historyOfCommands.size()-1);
             return currentPosition;
         }
         else{
@@ -250,6 +186,7 @@ public class Robot {
     public Position setPositionOnEastMovement(int spaces){
         if(currentPosition.getxPosition() + spaces > floor.getFloorSize()-1){
             System.out.println("Number of spaces for movement is too large");
+            historyOfCommands.remove(historyOfCommands.size()-1);
             return currentPosition;
         }
         else{
