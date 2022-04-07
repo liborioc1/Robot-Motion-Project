@@ -18,9 +18,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CommandsDecoderTests {
-    static Floor floor;
-    static Robot robot;
-    static CommandsDecoder commandsDecoder;
+    Floor floor;
+    Robot robot;
+    CommandsDecoder commandsDecoder;
     static AtomicBoolean flag=new AtomicBoolean(true);
     public static List<String> commandsList = Collections.synchronizedList(new ArrayList<String>());
 
@@ -85,7 +85,7 @@ public class CommandsDecoderTests {
         Position position=new Position(0,2);
         Assertions.assertEquals(position.toString(),robot.getCurrentPosition().toString());
         commandsList.add("m 2");
-
+        System.out.println(outContent1.toString());
         //t2
         commandsDecoder.decodeCommand("u");
         Assertions.assertTrue(robot.getPenUp());
@@ -165,21 +165,13 @@ public class CommandsDecoderTests {
 
     }
 
-    public void testDecodeReplayCommaands()
+    @Test
+    public void testDecodeReplayCommands()
     {
+
         floor = new Floor();
         robot=new Robot(floor);
         commandsDecoder=new CommandsDecoder(robot,floor,flag);
-
-        //t0
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        commandsDecoder.decodeReplayCommands("m 3");
-        commandsDecoder.decodeReplayCommands("s 2");
-        commandsDecoder.decodeReplayCommands("r");
-        //check 3 prints of floor must be initialized
-        String expectedOutput  = "Floor has not been initialized. Floor must be initialized to perform requested move\r\nInvalid Input Format. Please Check Spaces\r\nFloor has not been initialized. Floor must be initialized to perform requested command\r\n";
-        assertEquals(expectedOutput, outContent.toString());
 
         //t1
         //check board initialization and print
@@ -224,24 +216,12 @@ public class CommandsDecoderTests {
         commandsDecoder.decodeReplayCommands("l");
         Assertions.assertEquals(Robot.Orientation.NORTH,robot.getOrientation());
 
-
         //t6
         ByteArrayOutputStream outContent2 = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent2));
         commandsDecoder.decodeReplayCommands("c");
         String expectedOutput2  =commandsDecoder.getRobot().printCurrentPosition()+"\r\n";
         assertEquals(expectedOutput2, outContent2.toString());
-
-        //t10
-        //t11
-        ByteArrayOutputStream outContent3 = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent3));
-        commandsDecoder.decodeReplayCommands("m -20");
-        commandsDecoder.decodeReplayCommands("m 60");
-        commandsDecoder.decodeReplayCommands("invalid command");
-        commandsDecoder.decodeReplayCommands("s");
-        String expectedOutput3  = "Invalid Input Format or Incorrect Command or Value(must be <= 40)\r\nInvalid Input Format or Incorrect Command or Value(must be <= 40)\r\nInvalid Input Format or Incorrect Command or Value(must be <= 40)\r\nInvalid Input Format. Please Check Spaces\r\n";
-        assertEquals(expectedOutput3, outContent3.toString());
 
         //t54
         commandsDecoder.decodeReplayCommands("i 3");
@@ -263,12 +243,12 @@ public class CommandsDecoderTests {
         Assertions.assertTrue(commandsDecoder.getRobot().getPenUp());
     }
 
-    @AfterAll
-    public static void teardown()
-    {
-        floor = null;
-        robot=null;
-        commandsDecoder=null;
-    }
+//    @AfterAll
+//    public static void teardown()
+//    {
+//        floor = null;
+//        robot=null;
+//        commandsDecoder=null;
+//    }
 
 }

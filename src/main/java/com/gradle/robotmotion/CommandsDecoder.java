@@ -127,8 +127,15 @@ public class CommandsDecoder {
             BigDecimal numberBigDecimal = new BigDecimal(command.split(" ")[1]);
             int number = numberBigDecimal.intValue();
             //one char followed by one digit
-            if(letter.equals("m")) robot.moveForward(number);
-            else floor.initializeFloor(number);
+            if(letter.equals("m")){
+                robot.moveForward(number);
+            }
+            else {
+                if(floor.getFloorSize() != 0){
+                    robot = new Robot(floor);
+                }
+                floor.initializeFloor(number);
+            }
 
         }
         else
@@ -147,7 +154,9 @@ public class CommandsDecoder {
             else if(letter.equals("p"))
                 floor.printFloor();
             else
+            {
                 System.out.println(robot.printCurrentPosition());
+            }
         }
     }
 
