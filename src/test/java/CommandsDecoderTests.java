@@ -2,9 +2,7 @@ import com.gradle.robotmotion.Floor;
 import com.gradle.robotmotion.Position;
 import com.gradle.robotmotion.Robot;
 import com.gradle.robotmotion.CommandsDecoder;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -23,15 +21,6 @@ public class CommandsDecoderTests {
     CommandsDecoder commandsDecoder;
     static AtomicBoolean flag=new AtomicBoolean(true);
     public static List<String> commandsList = Collections.synchronizedList(new ArrayList<String>());
-
-//    @BeforeAll
-//    public static void setUp()
-//    {
-//        floor = new Floor();
-//        robot=new Robot(floor);
-//        commandsDecoder=new CommandsDecoder(robot,floor,flag);
-//        //floor.initializeFloor(10);
-//    }
 
     @Test
     public void testDecodeCommand()
@@ -149,13 +138,13 @@ public class CommandsDecoderTests {
 
 
         //check list at the end
-        Assertions.assertTrue(Arrays.equals(Robot.historyOfCommands.toArray(), commandsList.toArray()));
+        Assertions.assertArrayEquals(Robot.historyOfCommands.toArray(), commandsList.toArray());
 
         Position prvsPosition= robot.getCurrentPosition();
         Robot.Orientation prvsOrientation= robot.getOrientation();
         boolean prvsPen=robot.getPenUp();
 
-        //run  H
+        //t56
         commandsDecoder.decodeCommand("h");
 
         Assertions.assertEquals(robot.getOrientation(),prvsOrientation);
@@ -243,12 +232,44 @@ public class CommandsDecoderTests {
         Assertions.assertTrue(commandsDecoder.getRobot().getPenUp());
     }
 
-//    @AfterAll
-//    public static void teardown()
-//    {
-//        floor = null;
-//        robot=null;
-//        commandsDecoder=null;
-//    }
+    @Test
+    public void testReplayCommands(){
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        commandsList = Collections.synchronizedList(new ArrayList<String>());
+        commandsList.add("i 3");
+        commandsList.add("d");
+        commandsList.add("m 1");
+
+        floor = new Floor();
+        robot=new Robot(floor);
+        commandsDecoder=new CommandsDecoder(robot,floor,flag);
+        commandsDecoder.decodeCommand("i 3");
+        commandsDecoder.decodeCommand("d");
+        commandsDecoder.decodeCommand("m 1");
+
+        Floor floorPrvs = floor;
+        Position prvsPosition= robot.getCurrentPosition();
+        Robot.Orientation prvsOrientation= robot.getOrientation();
+        boolean prvsPen=robot.getPenUp();
+
+        commandsDecoder.replayCommands();
+
+        Assertions.assertArrayEquals(Robot.historyOfCommands.toArray(), commandsList.toArray());
+        Assertions.assertEquals(robot.getOrientation(),prvsOrientation);
+        Assertions.assertEquals(robot.getPenUp(), prvsPen);
+        Assertions.assertEquals(robot.getCurrentPosition().getxPosition(), prvsPosition.getxPosition());
+        Assertions.assertEquals(robot.getCurrentPosition().getyPosition(), prvsPosition.getyPosition());
+
+        for(int i = 0; i <= floor.getFloorSize() - 1; i++){
+            for(int j = 0; j <= floor.getFloorSize() - 1; j++){
+                assertEquals(floor.getFloor()[i][j],  floorPrvs.getFloor()[i][j]);
+            }
+        }
+
+        String expectedOutput  = "\nReplaying: \r\nCommand: i 3\r\nCommand: d\r\nCommand: m 1\r\nEnd Replay.\n\r\n";
+        assertEquals(expectedOutput, outContent.toString());
+    }
 
 }
