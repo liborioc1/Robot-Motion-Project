@@ -2,6 +2,7 @@ import com.gradle.robotmotion.Floor;
 import com.gradle.robotmotion.Position;
 import com.gradle.robotmotion.Robot;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,8 +10,6 @@ public class RobotTests {
 
     static Floor floor;
     static Robot robot;
-
-
 
     @Test
     public void testGetOrientation(){

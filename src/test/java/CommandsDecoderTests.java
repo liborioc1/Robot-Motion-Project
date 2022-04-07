@@ -234,20 +234,23 @@ public class CommandsDecoderTests {
 
     @Test
     public void testReplayCommands(){
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        commandsList = Collections.synchronizedList(new ArrayList<String>());
-        commandsList.add("i 3");
-        commandsList.add("d");
-        commandsList.add("m 1");
 
         floor = new Floor();
         robot=new Robot(floor);
         commandsDecoder=new CommandsDecoder(robot,floor,flag);
-        commandsDecoder.decodeCommand("i 3");
-        commandsDecoder.decodeCommand("d");
-        commandsDecoder.decodeCommand("m 1");
+
+        commandsDecoder.decodeReplayCommands("i 10");
+        commandsDecoder.decodeReplayCommands("p");
+        commandsDecoder.decodeReplayCommands("m 2");
+        commandsDecoder.decodeReplayCommands("u");
+        commandsDecoder.decodeReplayCommands("d");
+        commandsDecoder.decodeReplayCommands("r");
+        commandsDecoder.decodeReplayCommands("l");
+        commandsDecoder.decodeReplayCommands("c");
+        commandsDecoder.decodeReplayCommands("i 3");
+        commandsDecoder.decodeReplayCommands("p");
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
 
         Floor floorPrvs = floor;
         Position prvsPosition= robot.getCurrentPosition();
@@ -268,7 +271,34 @@ public class CommandsDecoderTests {
             }
         }
 
-        String expectedOutput  = "\nReplaying: \r\nCommand: i 3\r\nCommand: d\r\nCommand: m 1\r\nEnd Replay.\n\r\n";
+        String expectedOutput  = "\nReplaying: \r\nCommand: i 10\r\nCommand: p\r\n" +
+                "Floor is of size: 10 x 10\r\n" +
+                "9                                 \r\n" +
+                "8                                 \r\n" +
+                "7                                 \r\n" +
+                "6                                 \r\n" +
+                "5                                 \r\n" +
+                "4                                 \r\n" +
+                "3                                 \r\n" +
+                "2                                 \r\n" +
+                "1                                 \r\n" +
+                "0                                 \r\n" +
+                "    0  1  2  3  4  5  6  7  8  9  \r\n" +
+                "Command: m 2\r\n" +
+                "Command: u\r\n" +
+                "Command: d\r\n" +
+                "Command: r\r\n" +
+                "Command: l\r\n" +
+                "Command: c\r\n" +
+                "Position: {0,2} - Pen: Down - Facing: NORTH\r\n" +
+                "Command: i 3\r\n" +
+                "Command: p\r\n" +
+                "Floor is of size: 3 x 3\r\n" +
+                "2            \r\n" +
+                "1            \r\n" +
+                "0            \r\n" +
+                "    0  1  2  \r\n" +
+                "End Replay.\n\r\n";
         assertEquals(expectedOutput, outContent.toString());
     }
 
