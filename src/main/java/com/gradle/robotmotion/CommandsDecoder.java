@@ -127,75 +127,28 @@ public class CommandsDecoder {
             BigDecimal numberBigDecimal = new BigDecimal(command.split(" ")[1]);
             int number = numberBigDecimal.intValue();
             //one char followed by one digit
-            switch (letter)
-            {
-                case "m":
-                    if(floor.getFloorSize() == 0)
-                    {
-                        System.out.println("Floor has not been initialized. Floor must be initialized to perform requested move");
-                        return;
-                    }
-                    robot.moveForward(number);
-                    break;
-                case "i":
-                    if(floor.getFloorSize() != 0){
-                        robot = new Robot(floor);
-                    }
-                    floor.initializeFloor(number);
-                    break;
-                default:
-                    System.out.println("Invalid Input Format. Please Check Spaces");
-            }
+            if(letter.equals("m")) robot.moveForward(number);
+            else floor.initializeFloor(number);
 
-        }
-        else if(command.matches("^[a-zA-Z]{1}$"))
-        {
-            String letter=command.split(" ")[0];
-
-            if(letter.equals("q"))
-            {
-                flag.set(false);
-                System.out.println("End of Program");
-                return;
-            }
-            if(floor.getFloorSize()==0)
-            {
-                System.out.println("Floor has not been initialized. Floor must be initialized to perform requested command");
-                return;
-            }
-            switch (letter)
-            {
-                case "u":
-                    robot.penUp();
-                    break;
-                case "d":
-                    robot.penDown();
-                    break;
-                case "r":
-                    robot.turnRight();
-                    break;
-                case "l":
-                    robot.turnLeft();
-                    break;
-                case "p":
-                    floor.printFloor();
-                    break;
-                case "c":
-                    System.out.println(robot.printCurrentPosition());
-                    break;
-                case "h":
-                    replayCommands();
-                    break;
-                default:
-                    System.out.println("Invalid Input Format. Please Check Spaces");
-
-            }
         }
         else
         {
-            System.out.println("Invalid Input Format or Incorrect Command or Value(must be <= 40)");
-        }
+            String letter=command.split(" ")[0];
 
+
+            if(letter.equals("u"))
+                robot.penUp();
+            else if(letter.equals("d"))
+                robot.penDown();
+            else if(letter.equals("r"))
+                robot.turnRight();
+            else if(letter.equals("l"))
+                robot.turnLeft();
+            else if(letter.equals("p"))
+                floor.printFloor();
+            else
+                System.out.println(robot.printCurrentPosition());
+        }
     }
 
     public void replayCommands(){
